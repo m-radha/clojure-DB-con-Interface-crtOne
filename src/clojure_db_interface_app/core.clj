@@ -20,6 +20,9 @@
     (iface/insert-data db-impl "John Doe")
     (iface/insert-data db-impl "Jane Doe")
 
+    (iface/update-data db-impl 62 "John Smith")
+    (iface/delete-data db-impl 59)
+
     ;; Query and print data
     (let [data (iface/query-data db-impl)]
       (doseq [row data]

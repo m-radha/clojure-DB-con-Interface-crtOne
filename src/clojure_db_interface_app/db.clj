@@ -1,6 +1,4 @@
-(ns clojure-db-interface-app.db
-
-  (:require [clojure.java.jdbc :as jdbc]))
+(ns clojure-db-interface-app.db)
 
 (def db-spec
   {:subprotocol "mysql"

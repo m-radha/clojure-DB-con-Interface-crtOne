@@ -65,17 +65,17 @@
 (def db-test (db/->DatabaseImplementation db-spec-mock))
 
 (deftest test-create-table
-  (testing "CREATE table"
+  (testing "CREATE TABLE"
     (iface/create-table db-test) 
     ))
 
 (deftest test-insert-data
-  (testing "INSERT data"
+  (testing "INSERT DATA"
     (iface/insert-data db-test "John Doe")
     ))
 
 (deftest test-query-data
-  (testing "QUERY data"
+  (testing "QUERY DATA"
     (let [data-from-db (iface/query-data db-test)] 
       )))
 

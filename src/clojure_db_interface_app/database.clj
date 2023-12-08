@@ -8,10 +8,10 @@
   iface/DatabaseOperations
 
   (create-table [_]
-                (sql/with-db-connection [db-conn db-spec]
-                  (let [tables (sql/query db-conn ["SELECT table_name FROM information_schema.tables WHERE table_name = 'TEST_TABLE'"])]
-                    (when (empty? tables)
-                      (sql/execute! db-conn ["CREATE TABLE test_table (id SERIAL PRIMARY KEY, name VARCHAR(100))"])))))
+    (sql/with-db-connection [db-conn db-spec]
+      (let [tables (sql/query db-conn ["SELECT table_name FROM information_schema.tables WHERE table_name = 'TEST_TABLE'"])]
+        (when (empty? tables)
+          (sql/execute! db-conn ["CREATE TABLE test_table (id SERIAL PRIMARY KEY, name VARCHAR(100))"])))))
 
 
   (insert-data [_ name]
@@ -20,6 +20,17 @@
 
   (query-data [_]
     (sql/with-db-connection [db-conn db-spec]
-      (sql/query db-conn "SELECT * FROM test_table"))))
+      (sql/query db-conn "SELECT * FROM test_table")))
+  
+  (update-data [_ id new_name]
+               (sql/with-db-connection [db-conn db-spec]
+                 (sql/update! db-conn :test_table {:name new_name} ["id=?" id])))
+  
+  (delete-data [_ id]
+               (sql/with-db-connection [db-conn db-spec]
+                 (sql/delete! db-conn :test_table ["id=?" id])))
+  )
+
+
 
 
